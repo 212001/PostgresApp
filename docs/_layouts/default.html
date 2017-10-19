@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="last-modified" content="{{ site.time | date: '%A, %d %Y %H:%M:%S GMT' }}"/>
+    <title>{{ page.title }}</title>
+    <meta name="author" content="Jakob Egger and Mattt Thompson"/>
+    <meta name="description" content="{{ site.description }}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="license" href="http://www.opensource.org/licenses/postgresql" title="PostgreSQL License"/>
+    <link rel="stylesheet" href="/css/postgresapp.css"/>
+
+    <meta content="{{ page.title }}" property="og:title"/>
+    <meta content="http://postgresapp.com/" property="og:url"/>
+    <meta content="http://postgresapp.com/img/PostgresAppIconLarge.png" property="og:image"/>
+    <meta content="{{ site.name }}" property="og:site_name"/>
+    <meta content="{{ site.description }}" property="og:description"/>
+	{% assign pathComponents = page.path | split: '/' %}
+	{% for pathComponent in pathComponents limit: 1 %}
+		{% if pathComponent.size == 2 %}
+			{% assign lang = pathComponent %}
+		{% else %}
+			{% assign lang = 'en' %}
+		{% endif %}
+	{% endfor %}
+	{% if lang == 'en' %}
+		{% assign langPathPrefix = '' %}
+	{% else %}
+		{% assign langPathPrefix = lang | prepend: '/' %}
+	{% endif %}
+    {% assign pathComponents = page.path | split: '/' %}{% for pathComponent in pathComponents limit: 1 %}{% if pathComponent.size == 2 %}{% assign basename = page.path | remove_first: pathComponent | remove_first: '/' %}{% else %}{% assign basename = page.path %}{% endif %}{% endfor %}{% for lang in site.languages %}{% if lang == 'en' %}{% assign langPath = basename %}{% else %}{% assign langPath = basename | prepend: '/' | prepend: lang %}{% endif %}{% assign langPages = site.pages | where: 'path', langPath %}{% for langPage in langPages %}{%if page.path != langPage.path%}<link rel="alternate" hreflang="{{lang}}" href="{{ langPage.url | remove: 'index.html'}}">{%endif%}{% endfor %}{% endfor %}
+  </head>
+  <body>
+
+	<div class="container">
+		<header>
+			<hgroup>
+				<a id="title-link-1" href="{{langPathPrefix}}/"><!-- this link covers the Postgres.app image --></a>
+				<a id="title-link-2" href="{{langPathPrefix}}/">
+		  			<h1 itemprop="name">Postgres.app</h1>
+		  			<h2 itemprop="description">{{site.strings[lang].subtitle}}</h2>
+				</a>
+				<ul class="buttons">
+					<li><a href="{{ site.downloadLocation }}">{{site.strings[lang].download-button}}</a></li>
+					<li><a href="{{langPathPrefix}}/documentation/">{{site.strings[lang].docs-button}}</a></li>
+					<li>
+						<a href="{{ site.github.repository_url }}">{{site.strings[lang].github-button}} <span class="note">{{ site.github.public_repositories[0].stargazers_count }} {{site.strings[lang].stars}}</span></a>
+					</li>
+				</ul>
+			</hgroup>
+		</header>
+	
+	    {% include lang-links.html %}
+	
+		<div class="body">
+			{{ content }}
+		</div>
+	</div>
+
+
+	<ul class=footer>
+		<li>
+			{{site.strings[lang].follow}} <a href="https://twitter.com/PostgresApp">@PostgresApp</a>
+		</li>
+		<li>
+			{{site.strings[lang].find-us}} <a href="{{ site.github.repository_url }}">Github</a> 
+		</li>
+		<li>
+			{{site.strings[lang].typo}}
+			<a href="{{ site.github.repository_url }}/edit/master/docs/{{ page.path }}">{{site.strings[lang].edit-page}}</a>
+		</li>
+	</ul>
+  </body>
+  <!-- Repository: {{ site.github.repository_url }} -->
+  <!-- Page Path: {{ page.path }} -->
+</html>

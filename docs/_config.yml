@@ -1,0 +1,70 @@
+name: Postgres.app
+description: "Postgres.app is a full featured PostgreSQL installation packaged as a standard Mac app."
+
+gems: ['jekyll-github-metadata']
+repository: postgresapp/postgresapp
+
+downloadLocation: "https://github.com/PostgresApp/PostgresApp/releases/download/v2.1/Postgres-2.1.dmg"
+releaseNotesLocation: "https://github.com/PostgresApp/PostgresApp/releases/v2.1/"
+postgresappVersion: "2.1"
+postgresappMinSystemVersion: "10.10"
+postgresqlVersions: [
+	{ postgres: "10.0", postgis: "2.4.0" },
+	{ postgres: "9.6.5", postgis: "2.3.3" },
+	{ postgres: "9.5.9", postgis: "2.2.5" },
+]
+
+legacyMinSystemVersion: "10.7"
+legacyVersions: [
+	{
+		downloadLocation: "https://github.com/PostgresApp/PostgresApp/releases/download/9.3.19/Postgres-9.3.19.zip",
+		releaseNotes: "https://github.com/PostgresApp/PostgresApp/releases/9.3.19/",
+		postgresqlVersion: "9.3.19",
+		postgisVersion: "2.1.8",
+	},
+	{
+		downloadLocation: "https://github.com/PostgresApp/PostgresApp/releases/download/9.4.14/Postgres-9.4.14.zip",
+		releaseNotes: "https://github.com/PostgresApp/PostgresApp/releases/9.4.14/",
+		postgresqlVersion: "9.4.14",
+		postgisVersion: "2.1.8",
+	},
+	{
+		downloadLocation: "https://github.com/PostgresApp/PostgresApp/releases/download/9.5.9/Postgres-9.5.9.zip",
+		releaseNotes: "https://github.com/PostgresApp/PostgresApp/releases/9.5.9/",
+		postgresqlVersion: "9.5.9",
+		postgisVersion: "2.2.5",
+	},
+	{
+		downloadLocation: "https://github.com/PostgresApp/PostgresApp/releases/download/9.6.5/Postgres-9.6.5.zip",
+		releaseNotes: "https://github.com/PostgresApp/PostgresApp/releases/9.6.5/",
+		postgresqlVersion: "9.6.5",
+		postgisVersion: "2.3.3",
+	},
+]
+
+languages: [en, de]
+
+strings: {
+	de: {
+		subtitle: Der schnellste Weg zu PostgreSQL am Mac,
+		download-button: Download,
+		docs-button: Dokumentation,
+		github-button: Github,
+		stars: Sterne,
+		follow: Folge,
+		find-us: Finde uns auf,
+		typo: "Feler gefunden?",
+		edit-page: Bearbeite diese Seite,
+	},
+	en: {
+		subtitle: The easiest way to get started with PostgreSQL on the Mac,
+		download-button: Download,
+		docs-button: Documentation,
+		github-button: Github,
+		stars: Stars,
+		follow: Follow,
+		find-us: Find us on,
+		typo: "Spotted a typo?",
+		edit-page: edit this page,
+	}
+}
